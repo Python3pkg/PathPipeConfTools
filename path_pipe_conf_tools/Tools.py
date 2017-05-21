@@ -4,13 +4,13 @@ import re
 
 class ConfigDirectory(object):
   def just_files(self, names):
-    return filter(os.path.isfile, names)
+    return list(filter(os.path.isfile, names))
 
   def get_files_in_directory(self, dirname):
     contents = os.listdir(dirname)
     def add_path(filename):
       return os.path.join(dirname, filename)
-    contents = map(add_path, contents)
+    contents = list(map(add_path, contents))
     return self.just_files(contents)
 
   def is_pipeline_conf(self, name):
@@ -20,17 +20,17 @@ class ConfigDirectory(object):
 
   def find_job_trackers_in_folder(self, dirname):
     files = self.get_files_in_directory(dirname)
-    job_trackers = filter(self.is_pipeline_conf, files)
+    job_trackers = list(filter(self.is_pipeline_conf, files))
     return job_trackers
 
   def just_dirs(self, names):
-    return filter(os.path.isdir, names)
+    return list(filter(os.path.isdir, names))
 
   def get_subdirectories(self, parent):
     contents = os.listdir(parent)
     def add_path(child):
       return os.path.join(parent, child)
-    contents = map(add_path, contents)
+    contents = list(map(add_path, contents))
     return self.just_dirs(contents)
 
   def get_all_job_tracker_filenames(self, dirname):

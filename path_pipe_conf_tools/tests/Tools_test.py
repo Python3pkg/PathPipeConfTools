@@ -2,7 +2,7 @@ import unittest
 import mock
 import os
 from mock import MagicMock
-from StringIO import StringIO
+from io import StringIO
 from path_pipe_conf_tools.Tools import ConfigDirectory, TrackerFile, PipelineJob
 
 class TestAdminRequired(unittest.TestCase):
